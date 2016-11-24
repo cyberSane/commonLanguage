@@ -1,0 +1,24 @@
+Documentation
+
+
+Language Name :  Common Language
+
+Supports :
+
+	          *	Numbers	[0-9]+
+            *	 Words	[A-Z a-z]+
+	          *	Semicolon 	[ ; ]
+
+Specification :
+
+	         *	Words    : [identifiers,string values,name spaces]
+
+	                     Name Spaces :
+
+                                        ⁃	Equals
+	                                      ⁃	Equal
+	                                      ⁃	End
+	                                      ⁃	True
+	                                      ⁃	False
+	                                      ⁃	Do
+	                                      ⁃	Does
