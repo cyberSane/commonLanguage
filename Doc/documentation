@@ -1,24 +1,60 @@
 Documentation
 
-
 Language Name :  Common Language
 
 Supports :
 
-	          *	Numbers	[0-9]+
-            *	 Words	[A-Z a-z]+
-	          *	Semicolon 	[ ; ]
+	          *	Numbers
+              *	Words
+	          *	Semicolon (;)
 
 Specification :
 
-	         *	Words    : [identifiers,string values,name spaces]
+	         Words :
 
-	                     Name Spaces :
+	            * identifiers
+	            * string values
+	            * name spaces
 
-                                        ⁃	Equals
-	                                      ⁃	Equal
-	                                      ⁃	End
-	                                      ⁃	True
-	                                      ⁃	False
-	                                      ⁃	Do
-	                                      ⁃	Does
+	         Name Spaces :
+
+	            ⁃   equals
+                ⁃	equal
+                ⁃	end
+                ⁃	true
+                ⁃	false
+                ⁃	do
+                ⁃	does
+                ⁃	plus
+                ⁃	minus
+                ⁃	multiply
+                ⁃	divide
+
+
+
+Language syntax Samples:
+    Adding two numbers - 2 plus 1
+    subtraction two numbers - 2 minus 1
+    multiplying two numbers - 2 multiply 2
+    dividing two numbers - 2 divide 2
+
+    function -
+
+        add takes a, b does
+            //something
+        end
+
+    condition -
+
+        true/false do                 |                      a equals/divisible b do
+            //code goes here          |                         //code goes here
+        end                           |                      end
+
+
+                ---------------DEEP CONCEPT----------------
+    loop
+
+        LENGTH times do
+          //code goes here
+        end
+
