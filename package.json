@@ -8,7 +8,12 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "jison": "^0.4.17"
+    "jison": "^0.4.17",
+    "pre-commit": "^1.1.2"
+  },
+  "precommit.silent": true,
+  "pre-commit": {
+    "run": "test"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
