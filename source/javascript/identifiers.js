@@ -1,26 +1,25 @@
 var Tree = require('./Tree');
 
 class Identifiers {
-    constructor() {
-        this.variableTable = {};
-    }
+  constructor() {
+    this.variableTable = {};
+  }
 
-    assign(key, value) {
-        if (value instanceof Tree)
-            this.variableTable[key] = value.evaluate();
-        else
-            this.variableTable[key] = value;
-    }
+  assign(key, value) {
+    this.variableTable[key] = value;
+  }
 
-    contains(key){
-        if(this.variableTable[key])
-            return true;
-        return false;
-    }
+  contains(key) {
+    return this.variableTable.hasOwnProperty(key);
+  }
 
-    getValueOf(key){
-        return this.variableTable[key];
-    }
+  getValueOf(key) {
+    return this.variableTable[key];
+  }
+
+  empty() {
+    this.variableTable = {};
+  }
 }
 
 
