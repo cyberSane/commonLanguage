@@ -72,53 +72,45 @@
   }
 */
 var commonGrammer = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,6],$V1=[1,5],$V2=[2,2],$V3=[1,10],$V4=[1,11],$V5=[1,12],$V6=[1,13],$V7=[1,14],$V8=[5,7,10,12,13,14,15,16,17],$V9=[2,16],$Va=[5,10,17],$Vb=[1,21],$Vc=[5,7,10,12,13,17],$Vd=[5,7,10,12,13,14,15,17];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,5],$V1=[1,6],$V2=[1,7],$V3=[1,11],$V4=[1,12],$V5=[1,13],$V6=[1,14],$V7=[1,15],$V8=[2,14],$V9=[1,18],$Va=[7,11,12,13,14,15,17],$Vb=[7,11,12,17],$Vc=[7,11,12,13,14,17];
 var parser = {trace: function trace() { },
 yy: {},
-symbols_: {"error":2,"expressions":3,"statement":4,"EOF":5,"expression":6,"SEMICOLON":7,"assignment_expression":8,"assignment":9,"WORD":10,"ASSIGNMENT":11,"+":12,"-":13,"*":14,"/":15,"^":16,"NUMBER":17,"$accept":0,"$end":1},
-terminals_: {2:"error",5:"EOF",7:"SEMICOLON",10:"WORD",11:"ASSIGNMENT",12:"+",13:"-",14:"*",15:"/",16:"^",17:"NUMBER"},
-productions_: [0,[3,2],[4,1],[4,3],[4,1],[4,3],[4,2],[8,2],[8,1],[9,3],[6,3],[6,3],[6,3],[6,3],[6,3],[6,1],[6,1]],
+symbols_: {"error":2,"expressions":3,"statement":4,"EOF":5,"assignment":6,"SEMICOLON":7,"e":8,"WORD":9,"ASSIGNMENT":10,"+":11,"-":12,"*":13,"/":14,"^":15,"(":16,")":17,"NUMBER":18,"$accept":0,"$end":1},
+terminals_: {2:"error",5:"EOF",7:"SEMICOLON",9:"WORD",10:"ASSIGNMENT",11:"+",12:"-",13:"*",14:"/",15:"^",16:"(",17:")",18:"NUMBER"},
+productions_: [0,[3,2],[4,2],[4,3],[4,2],[4,3],[6,3],[8,3],[8,3],[8,3],[8,3],[8,3],[8,3],[8,1],[8,1]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
 var $0 = $$.length - 1;
 switch (yystate) {
 case 1:
-console.log(result.evaluate()); return result; 
+console.log(JSON.stringify(tree.branchList));
 break;
-case 2:
- result = this.$;
+case 2: case 3: case 4: case 5:
+ tree.addBranch(this.$) 
 break;
-case 9:
- identifiers.assign($$[$0-2],$$[$0]);
+case 6:
+ this.$ = new Branch(new Node($$[$0-1], dataType.variable), $$[$0-2], $$[$0]);  
 break;
-case 10:
-this.$ = new Tree(new Node('+', dataType.operator, identifiers), $$[$0-2], $$[$0]); 
+case 7:
+this.$ = new Branch(new Node($$[$0-1], dataType.operator), $$[$0-2], $$[$0]); 
+break;
+case 8: case 9: case 10:
+ this.$ = new Branch(new Node($$[$0-1], dataType.operator) , $$[$0-2], $$[$0]); 
 break;
 case 11:
- this.$ = new Tree(new Node('-', dataType.operator, identifiers) , $$[$0-2], $$[$0]); 
+ this.$ = new Branch(new Node($$[$0-1], dataType.operator), $$[$0-2], $$[$0]);
 break;
 case 12:
- this.$ = new Tree(new Node('*', dataType.operator, identifiers) , $$[$0-2], $$[$0]); 
+this.$ = new Node($$[$0-1], dataType.number);
 break;
 case 13:
- this.$ = new Tree(new Node('/', dataType.operator, identifiers) , $$[$0-2], $$[$0]); 
-break;
-case 14:
- this.$ = new Tree(new Node('^', dataType.operator, identifiers), $$[$0-2], $$[$0]);
-break;
-case 15:
-this.$ = new Node(Number(yytext),dataType.number, identifiers);
-break;
-case 16:
-
-        this.$ = new Node(yytext, dataType.symbol, identifiers);
-        
+this.$ = new Node(Number(yytext),dataType.number);
 break;
 }
 },
-table: [{3:1,4:2,6:3,8:4,9:7,10:$V0,17:$V1},{1:[3]},{5:[1,8]},{5:$V2,7:[1,9],12:$V3,13:$V4,14:$V5,15:$V6,16:$V7},{4:16,5:[2,4],6:15,8:4,9:7,10:$V0,17:$V1},o($V8,[2,15]),o([5,7,12,13,14,15,16],$V9,{11:[1,17]}),o($Va,[2,8],{7:[1,18]}),{1:[2,1]},{4:19,6:3,8:4,9:7,10:$V0,17:$V1},{6:20,10:$Vb,17:$V1},{6:22,10:$Vb,17:$V1},{6:23,10:$Vb,17:$V1},{6:24,10:$Vb,17:$V1},{6:25,10:$Vb,17:$V1},{5:$V2,7:[1,26],12:$V3,13:$V4,14:$V5,15:$V6,16:$V7},{5:[2,6]},{6:27,10:$Vb,17:$V1},o($Va,[2,7]),{5:[2,3]},o($Vc,[2,10],{14:$V5,15:$V6,16:$V7}),o($V8,$V9),o($Vc,[2,11],{14:$V5,15:$V6,16:$V7}),o($Vd,[2,12],{16:$V7}),o($Vd,[2,13],{16:$V7}),o($V8,[2,14]),{4:19,5:[2,5],6:3,8:4,9:7,10:$V0,17:$V1},o([5,7,10,17],[2,9],{12:$V3,13:$V4,14:$V5,15:$V6,16:$V7})],
-defaultActions: {8:[2,1],16:[2,6],19:[2,3]},
+table: [{3:1,4:2,6:3,8:4,9:$V0,16:$V1,18:$V2},{1:[3]},{5:[1,8]},{7:[1,9]},{7:[1,10],11:$V3,12:$V4,13:$V5,14:$V6,15:$V7},o([7,11,12,13,14,15],$V8,{10:[1,16]}),{8:17,9:$V9,16:$V1,18:$V2},o($Va,[2,13]),{1:[2,1]},{4:19,5:[2,2],6:3,8:4,9:$V0,16:$V1,18:$V2},{4:20,5:[2,4],6:3,8:4,9:$V0,16:$V1,18:$V2},{8:21,9:$V9,16:$V1,18:$V2},{8:22,9:$V9,16:$V1,18:$V2},{8:23,9:$V9,16:$V1,18:$V2},{8:24,9:$V9,16:$V1,18:$V2},{8:25,9:$V9,16:$V1,18:$V2},{8:26,9:$V9,16:$V1,18:$V2},{11:$V3,12:$V4,13:$V5,14:$V6,15:$V7,17:[1,27]},o($Va,$V8),{5:[2,3]},{5:[2,5]},o($Vb,[2,7],{13:$V5,14:$V6,15:$V7}),o($Vb,[2,8],{13:$V5,14:$V6,15:$V7}),o($Vc,[2,9],{15:$V7}),o($Vc,[2,10],{15:$V7}),o($Va,[2,11]),{7:[2,6],11:$V3,12:$V4,13:$V5,14:$V6,15:$V7},o($Va,[2,12])],
+defaultActions: {8:[2,1],19:[2,3],20:[2,5]},
 parseError: function parseError(str, hash) {
     if (hash.recoverable) {
         this.trace(str);
@@ -271,12 +263,11 @@ parse: function parse(input) {
 }};
 
 	var path = require('path');
-	var Tree = require(path.resolve('./source/javascript/Tree.js'));
-	var Node = require(path.resolve('./source/javascript/node.js'));
-	var dataType = require(path.resolve('./source/javascript/dataTypes'));
-	var Identifiers = require(path.resolve('./source/javascript/identifiers'));
-	var identifiers = new Identifiers();
-	var result;
+	var Branch = require(path.resolve('./source/javascript/branch.js'));
+    var Node = require(path.resolve('./source/javascript/node.js'));
+    var dataType = require(path.resolve('./source/javascript/dataTypes'));
+    var Tree = require(path.resolve('./source/javascript/tree.js'));
+    var tree = new Tree();
 /* generated by jison-lex 0.3.4 */
 var lexer = (function(){
 var lexer = ({
@@ -607,29 +598,29 @@ var YYSTATE=YY_START;
 switch($avoiding_name_collisions) {
 case 0:/* skip whitespace */
 break;
-case 1:return 17
+case 1:return 18
 break;
-case 2:return 10
+case 2:return 13
 break;
 case 3:return 14
 break;
-case 4:return 15
+case 4:return 12
 break;
-case 5:return 13
+case 5:return 11
 break;
-case 6:return 12
+case 6:return 15
 break;
-case 7:return 16
+case 7:return '!'
 break;
-case 8:return '!'
+case 8:return '=='
 break;
-case 9:return '=='
+case 9:return 10
 break;
-case 10:return 11
+case 10:return 7
 break;
-case 11:return 7
+case 11:return 'EOB'
 break;
-case 12:return 'EOB'
+case 12:return 9
 break;
 case 13:return 5
 break;
@@ -637,7 +628,7 @@ case 14:return 'INVALID'
 break;
 }
 },
-rules: [/^(?:\s+)/,/^(?:[0-9]+(\.[0-9]+)?\b)/,/^(?:[w]+)/,/^(?:multiply\b)/,/^(?:divide\b)/,/^(?:minus\b)/,/^(?:plus\b)/,/^(?:power\b)/,/^(?:factorial\b)/,/^(?:equals\b)/,/^(?:equal\b)/,/^(?:;)/,/^(?:end\b)/,/^(?:$)/,/^(?:.)/],
+rules: [/^(?:\s+)/,/^(?:[0-9]+(\.[0-9]+)?\b)/,/^(?:multiply\b)/,/^(?:divide\b)/,/^(?:minus\b)/,/^(?:plus\b)/,/^(?:power\b)/,/^(?:factorial\b)/,/^(?:equals\b)/,/^(?:equal\b)/,/^(?:;)/,/^(?:end\b)/,/^(?:\w+)/,/^(?:$)/,/^(?:.)/],
 conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14],"inclusive":true}}
 });
 return lexer;

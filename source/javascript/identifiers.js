@@ -24,4 +24,4 @@ class Identifiers {
 }
 
 
-module.exports = Identifiers;
+module.exports = new Identifiers();

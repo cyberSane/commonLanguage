@@ -1,27 +1,26 @@
 {
-  "name": "common Language",
+  "name": "common_language",
   "version": "1.0.0",
   "description": "",
-  "main": "treeGenerator.js",
+  "main": "commonGrammer.js",
   "directories": {
     "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "jison": "^0.4.17"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CrazyCompiler/jison_assignments.git"
+    "url": "git+https://github.com/cyberSane/commonLanguage.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/CrazyCompiler/jison_assignments/issues"
+    "url": "https://github.com/cyberSane/commonLanguage/issues"
   },
-  "homepage": "https://github.com/CrazyCompiler/jison_assignments#readme",
-  "devDependencies": {
-    "jison": "^0.4.17",
-    "mocha": "^3.1.2",
-    "number-to-words": "^1.2.3"
-  }
+  "homepage": "https://github.com/cyberSane/commonLanguage#readme"
 }
