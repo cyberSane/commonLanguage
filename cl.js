@@ -16,6 +16,7 @@ rl.on('line', function(line){
 		equations.push(line);
 		console.log(parser.parse(equations.join("")).evaluate());
 	}catch(e){
-    		console.log(e);
+		equations.pop();
+    	console.log(e.message);
 	}
 })
