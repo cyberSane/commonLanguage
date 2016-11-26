@@ -21,8 +21,8 @@ describe('common language grammer', function () {
 
         it('should return same nothing when only single number value is given', function(){
            var expression = '2;';
-           // var expectedNode = new Node(1, symbols.number);
-           assert.deepEqual(parser.parse(expression).evaluate(), undefined); 
+           var expectedNode = new Node(2, symbols.number);
+           assert.deepEqual(parser.parse(expression).evaluate(), expectedNode); 
         });
     });
 });

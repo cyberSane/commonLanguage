@@ -19,6 +19,11 @@ class Node {
     getValue(){
         return this.value;
     }
+
+    toString(){
+        return this.value;
+    }
+
 };
 
 module.exports = Node;
