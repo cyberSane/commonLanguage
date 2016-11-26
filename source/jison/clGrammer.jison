@@ -16,11 +16,11 @@
 \s+                                                 /* skip whitespace */
 \d+                                                 return 'NUMBER'
 'times'|'by'|'minus'|'plus'|'power'|'not'|'mod'     return 'OPERATOR'
-\w+                                                 return 'WORD'
 ';'                                                 return 'SEMICOLON'
 'equals'                                            return 'EQUALS' 
 'equal'                                             return 'ASSIGNMENT' 
 'end'                                               return 'EOB'
+\w+                                                 return 'WORD'
 <<EOF>>                                             return 'EOF'
 
 
@@ -53,9 +53,9 @@ statement
     ;
 
 assignment
-    : identifier EQUALS number  
+    : identifier ASSIGNMENT number  
         { $$ = new Branch(new Node($2, dataType.operator) , $1, $3, interpreter); }
-    | identifier EQUALS identifier 
+    | identifier ASSIGNMENT identifier 
         { $$ = new Branch(new Node($2, dataType.operator) , $1, $3, interpreter); }
     ; 
 
