@@ -48,18 +48,19 @@ statements
     ;
 
 statement
-    : assignment SEMICOLON
+    :identifier SEMICOLON
+    { tree.addBranch(new Branch(plusNode , $1, zeroNode, interpreter)) }
+    | assignment SEMICOLON
     {tree.addBranch($$) }
     | expressions SEMICOLON
     { tree.addBranch($$) }
     |number SEMICOLON 
     { tree.addBranch(new Branch(plusNode , $1, zeroNode, interpreter)); }
-    |identifier SEMICOLON
     ;
 
 assignment
     : identifier ASSIGNMENT number  
-        { $$ = new Branch(new Node($2, symbols.operator) , $1, $3, interpreter); }
+        {$$ = new Branch(new Node($2, symbols.operator) , $1, $3, interpreter);}
     | identifier ASSIGNMENT identifier 
         { $$ = new Branch(new Node($2, symbols.operator) , $1, $3, interpreter); }
     | identifier ASSIGNMENT expressions 

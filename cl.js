@@ -9,17 +9,17 @@ var rl = readline.createInterface({
   terminal: false
 });
 
-var equations = [];
-
 rl.on('line', function(line){
+	var tree;
+	tree = parser.parse(line);
 	try{
 		if(line == "")
 			return ;	
-		equations.push(line);
-		var result = parser.parse(equations.join("\n")).evaluate();
+		var result = tree.evaluate();
 		console.log(result.getValue());
 	}catch(e){
-		equations.pop();
     	console.log("syntax error:",e);
+    	tree.removeLastBranch();
 	}
-})
+});
+

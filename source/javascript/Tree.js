@@ -10,6 +10,10 @@ class Tree {
         this.branchList.push(branch);
     }
 
+    removeLastBranch(){
+        this.branchList.pop();
+    }
+
     evaluate(){
     	var result;
     	this.branchList.forEach(function(branch){

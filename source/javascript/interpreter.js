@@ -36,7 +36,12 @@ class Interpreter {
     }
 
     hold(key, value) {
-        this.identifiers.assign(key, value);
+        if(value.isType(symbols.variable)){
+            this.validate(value);    
+            this.identifiers.assign(key, this.identifiers.getValueOf(value.getValue()));
+        }
+        else
+            this.identifiers.assign(key, value);
     }
 
     interpret(operator, firstValue, secondValue) {
