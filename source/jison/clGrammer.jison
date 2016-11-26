@@ -47,7 +47,7 @@ statements
 
 statement
     : assignment SEMICOLON
-    { tree.addBranch($$) }
+    {tree.addBranch($$) }
     | expressions SEMICOLON
     { tree.addBranch($$) }
     ;
@@ -81,7 +81,6 @@ expression
     | number OPERATOR  identifier 
     { $$ = new Branch(new Node($2, dataType.operator) , $1, $3, interpreter); }
     ;
-    
 
 number
     : NUMBER 
@@ -89,5 +88,6 @@ number
     ;
 
 identifier
-    : WORD {}
+    : WORD
+    { $$ = new Node($1,dataType.variable); }
     ;
