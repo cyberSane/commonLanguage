@@ -53,9 +53,7 @@ statement
     | expressions SEMICOLON
     { tree.addBranch($$) }
     |number SEMICOLON 
-    {  
-        tree.addBranch(new Branch(plusNode , $1, zeroNode, interpreter));
-    }
+    { tree.addBranch(new Branch(plusNode , $1, zeroNode, interpreter)); }
     |identifier SEMICOLON
     ;
 
@@ -64,6 +62,8 @@ assignment
         { $$ = new Branch(new Node($2, symbols.operator) , $1, $3, interpreter); }
     | identifier ASSIGNMENT identifier 
         { $$ = new Branch(new Node($2, symbols.operator) , $1, $3, interpreter); }
+    | identifier ASSIGNMENT expressions 
+        { $$ = new Branch(new Node($2, symbols.operator) , $1, $3, interpreter); }  
     ; 
 
 expressions
