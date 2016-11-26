@@ -12,7 +12,9 @@ var rl = readline.createInterface({
 var equations = [];
 
 rl.on('line', function(line){
-	try{	
+	try{
+		if(line == "")
+			return ;	
 		equations.push(line);
 		var result = parser.parse(equations.join("\n")).evaluate();
 		console.log(result.getValue());
