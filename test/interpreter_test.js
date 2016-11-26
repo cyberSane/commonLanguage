@@ -1,6 +1,6 @@
 var Interpreter = require('../source/javascript/interpreter.js');
 var Node = require('../source/javascript/node.js');
-var dataTypes = require('../source/javascript/dataTypes.js');
+var symbols = require('../source/javascript/symbols.js');
 var identifiers = require('../source/javascript/identifiers.js');
 var assert = require('assert');
 
@@ -11,44 +11,44 @@ describe('interpreter', function () {
     var interpreter;
 
     beforeEach(function(){
-        firstNode = new Node(2,dataTypes.number);
-        secondNode = new Node(1,dataTypes.number);
+        firstNode = new Node(2,symbols.number);
+        secondNode = new Node(1,symbols.number);
         interpreter = new Interpreter(identifiers);
     });
 
     describe('interpret', function () {
         describe('mathematical operation with two number arguments', function () {
             it('should calculate the subtraction and give result', function () {
-                var expectedNode = new Node(1, dataTypes.number);
-                var operatorNode = new Node('minus', dataTypes.operator);
+                var expectedNode = new Node(1, symbols.number);
+                var operatorNode = new Node('minus', symbols.operator);
                 
                 assert.deepEqual(expectedNode, interpreter.interpret(operatorNode, firstNode, secondNode));
             });
 
             it('should calculate the addition and give result', function () {
-                var expectedNode = new Node(3, dataTypes.number);
-                var operatorNode = new Node('plus', dataTypes.operator);
+                var expectedNode = new Node(3, symbols.number);
+                var operatorNode = new Node('plus', symbols.operator);
 
                assert.deepEqual(expectedNode, interpreter.interpret(operatorNode, firstNode, secondNode));
             });
 
             it('should calculate the multiplication and give result', function () {
-                var expectedNode = new Node(2, dataTypes.number);
-                var operatorNode = new Node('times', dataTypes.operator);
+                var expectedNode = new Node(2, symbols.number);
+                var operatorNode = new Node('times', symbols.operator);
 
                 assert.deepEqual(expectedNode, interpreter.interpret(operatorNode, firstNode, secondNode));
             });
 
             it('should calculate the division and give result', function () {
-                var expectedNode = new Node(2, dataTypes.number);
-                var operatorNode = new Node('by', dataTypes.operator);
+                var expectedNode = new Node(2, symbols.number);
+                var operatorNode = new Node('by', symbols.operator);
 
                 assert.deepEqual(expectedNode, interpreter.interpret(operatorNode, firstNode, secondNode));
             });
 
             it('should calculate the power and give result', function () {
-                var expectedNode = new Node(2, dataTypes.number);
-                var operatorNode = new Node('power', dataTypes.operator);
+                var expectedNode = new Node(2, symbols.number);
+                var operatorNode = new Node('power', symbols.operator);
 
                 assert.deepEqual(expectedNode, interpreter.interpret(operatorNode, firstNode, secondNode));
             });
@@ -56,10 +56,10 @@ describe('interpreter', function () {
 
         describe('mathematical operation with one variable and one number arguments', function () {
             it('should retrive the value of variable and calculate the subtraction and give result', function () {
-                interpreter.hold('a', new Node(2, dataTypes.number));
-                firstNode = new Node('a', dataTypes.variable);
-                var operatorNode = new Node('minus', dataTypes.operator);
-                var expectedNode = new Node(1, dataTypes.number);
+                interpreter.hold('a', new Node(2, symbols.number));
+                firstNode = new Node('a', symbols.variable);
+                var operatorNode = new Node('minus', symbols.operator);
+                var expectedNode = new Node(1, symbols.number);
                 
                 assert.deepEqual(expectedNode, interpreter.interpret(operatorNode, firstNode, secondNode));
             });
@@ -69,7 +69,7 @@ describe('interpreter', function () {
     describe('hold', function(){
         it('should add the key in identifiers with the given value', function(){
             var key = 'ram';
-            var value = new Node(2, dataTypes.number);
+            var value = new Node(2, symbols.number);
             assert.equal(false, identifiers.contains(key));
             interpreter.hold(key, value);
             assert.equal(true, identifiers.contains(key));
@@ -78,8 +78,8 @@ describe('interpreter', function () {
 
         it('should update the value in identifiers when is already present', function(){
             var key = 'sham';
-            var value = new Node(2, dataTypes.number);
-            var updatedValue = new Node(4, dataTypes.number);
+            var value = new Node(2, symbols.number);
+            var updatedValue = new Node(4, symbols.number);
             interpreter.hold(key, value);
             assert.equal(true, identifiers.contains(key));
             interpreter.hold(key, updatedValue);
@@ -94,7 +94,7 @@ describe('interpreter', function () {
             describe('value of symbol present in identifiers', function(){
                 it('should not throw exception', function(){
                     var symbol = 'd';
-                    var node = new Node(symbol, dataTypes.variable);
+                    var node = new Node(symbol, symbols.variable);
                     interpreter.hold(symbol, 20);
                     assert.doesNotThrow(function(){interpreter.validate(node)});
                 });
@@ -103,7 +103,7 @@ describe('interpreter', function () {
             describe('value of symbol absent in identifiers', function(){
                 it('should throw exception', function(){
                     var symbol = 'e';
-                    var node = new Node(symbol, dataTypes.variable);
+                    var node = new Node(symbol, symbols.variable);
                     assert.throws(function(){interpreter.validate(node);});
                 });
             });
@@ -112,7 +112,7 @@ describe('interpreter', function () {
         describe('symbol is a number', function(){
             it('should not throw exception', function(){
                 var symbol = 20;
-                var node = new Node(symbol, dataTypes.number);
+                var node = new Node(symbol, symbols.number);
                 assert.doesNotThrow(function(){interpreter.validate(node)});
             });
         });
@@ -122,8 +122,8 @@ describe('interpreter', function () {
         describe('symbol is a variable', function(){
             it('should retain the value from identifiers', function(){
                var symbol = 'f';
-               var value = new Node(20, dataTypes.number)
-               var node = new Node(symbol, dataTypes.number);
+               var value = new Node(20, symbols.number)
+               var node = new Node(symbol, symbols.number);
                interpreter.hold(symbol, value);
                assert.equal(20, interpreter.retainValue(symbol)); 
             });

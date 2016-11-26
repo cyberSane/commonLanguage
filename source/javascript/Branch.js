@@ -1,6 +1,5 @@
 var Evaluator = require('./interpreter');
 var Node = require('./node');
-var dataTypes = require('./dataTypes');
 
 class Branch {
     constructor(operator, leftChild, rightChild, interpreter) {
@@ -11,7 +10,7 @@ class Branch {
     }
 
     evaluateNode(operatorValue, leftValue, rightValue){
-        var equals = 'equal';
+        var equals = 'as';
         if(operatorValue.is(equals)){
             this.interpreter.hold(leftValue.value, rightValue);
             return rightValue;

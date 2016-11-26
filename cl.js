@@ -14,9 +14,9 @@ var equations = [];
 rl.on('line', function(line){
 	try{	
 		equations.push(line);
-		console.log(parser.parse(equations.join("")).evaluate());
+		console.log(parser.parse(equations.join("\n")).evaluate());
 	}catch(e){
 		equations.pop();
-    	console.log(e.message);
+    	console.log("syntax error:",e);
 	}
 })

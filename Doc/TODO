@@ -9,7 +9,6 @@ CL is a language to provide programming as we think, same as pseudo code. No nee
 
 The design is motivated by the following guidelines:
 
-- very fast compilation (1MLOC/s stretch goal); instantaneous incremental compilation
 - procedural (modular language)
 - strongly typed
 - concise syntax avoiding repetition
@@ -140,7 +139,7 @@ Basic types
   int     the integer values.
   float   the float values
   string  the string
-  double	  
+  double	 //todo
 
 The string type
 ----
