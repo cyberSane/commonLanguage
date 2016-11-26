@@ -1,25 +1,25 @@
 var assert = require('assert');
-var Tree = require('../source/javascript/treeGenerator.js');
-var createNode = require('../source/javascript/node.js');
-var Identifiers = require('../source/javascript/identifiers.js');
+var Branch = require('../source/javascript/Branch.js');
+var Node = require('../source/javascript/Node.js');
+var identifiers = require('../source/javascript/identifiers.js');
 var dataTypes = require('../source/javascript/dataTypes.js');
+var Interpreter = require('../source/javascript/interpreter');
 
 describe('identifiers', function () {
     describe('assign', function () {
         it('should return true if value has been assigned', function () {
-            var identifier = new Identifiers();
-            var node = createNode(2,dataTypes.number);
-            identifier.assign('a', node);
-            assert.equal(identifier.contains('a'), true);
+            var node = new Node(2,dataTypes.number);
+            identifiers.assign('a', node);
+            assert.equal(identifiers.contains('a'), true);
         });
-        it('should return evaluated value of tree', function () {
-            var identifier = new Identifiers();
-            var node = createNode(2);
-            var operatorNode = createNode('+');
-            var tree = new Tree(operatorNode, node, node, identifier);
-            var expected = createNode(4, dataTypes.number);
-            identifier.assign('a', tree);
-            assert.deepEqual(identifier.getValueOf('a'), expected);
+        it('should return evaluated value of branch', function () {
+            var interpreter = new Interpreter(identifiers);
+            var node = new Node(2, dataTypes.number);
+            var operatorNode = new Node('plus', dataTypes.operator);
+            var branch = new Branch(operatorNode, node, node, interpreter);
+            var expected = new Node(4, dataTypes.number);
+            identifiers.assign('b', branch);
+            assert.deepEqual(identifiers.getValueOf('b'), expected);
         });
     });
 

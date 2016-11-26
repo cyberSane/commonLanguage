@@ -9,11 +9,15 @@ class Node {
     }
 
     is(element) {
-        this.value == element;
+        return this.value == element;
     }
 
     evaluate() {
         return this;
+    }
+
+    getValue(){
+        return this.value;
     }
 };
 

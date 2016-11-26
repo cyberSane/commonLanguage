@@ -7,7 +7,15 @@ class Tree {
     }
 
     addBranch(branch){
-        this.branchList.unshift(branch);
+        this.branchList.push(branch);
+    }
+
+    evaluate(){
+    	var result;
+    	this.branchList.forEach(function(branch){
+    		result = branch.evaluate();
+    	});
+    	return result;
     }
 }
 

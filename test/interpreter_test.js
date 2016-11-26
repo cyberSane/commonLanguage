@@ -20,35 +20,35 @@ describe('interpreter', function () {
         describe('mathematical operation with two number arguments', function () {
             it('should calculate the subtraction and give result', function () {
                 var expectedNode = new Node(1, dataTypes.number);
-                var operatorNode = new Node('-', dataTypes.operator);
+                var operatorNode = new Node('minus', dataTypes.operator);
                 
                 assert.deepEqual(expectedNode, interpreter.interpret(operatorNode, firstNode, secondNode));
             });
 
             it('should calculate the addition and give result', function () {
                 var expectedNode = new Node(3, dataTypes.number);
-                var operatorNode = new Node('+', dataTypes.operator);
+                var operatorNode = new Node('plus', dataTypes.operator);
 
                assert.deepEqual(expectedNode, interpreter.interpret(operatorNode, firstNode, secondNode));
             });
 
             it('should calculate the multiplication and give result', function () {
                 var expectedNode = new Node(2, dataTypes.number);
-                var operatorNode = new Node('*', dataTypes.operator);
+                var operatorNode = new Node('times', dataTypes.operator);
 
                 assert.deepEqual(expectedNode, interpreter.interpret(operatorNode, firstNode, secondNode));
             });
 
             it('should calculate the division and give result', function () {
                 var expectedNode = new Node(2, dataTypes.number);
-                var operatorNode = new Node('/', dataTypes.operator);
+                var operatorNode = new Node('by', dataTypes.operator);
 
                 assert.deepEqual(expectedNode, interpreter.interpret(operatorNode, firstNode, secondNode));
             });
 
             it('should calculate the power and give result', function () {
                 var expectedNode = new Node(2, dataTypes.number);
-                var operatorNode = new Node('^', dataTypes.operator);
+                var operatorNode = new Node('power', dataTypes.operator);
 
                 assert.deepEqual(expectedNode, interpreter.interpret(operatorNode, firstNode, secondNode));
             });
@@ -58,7 +58,7 @@ describe('interpreter', function () {
             it('should retrive the value of variable and calculate the subtraction and give result', function () {
                 interpreter.hold('a', new Node(2, dataTypes.number));
                 firstNode = new Node('a', dataTypes.variable);
-                var operatorNode = new Node('-', dataTypes.operator);
+                var operatorNode = new Node('minus', dataTypes.operator);
                 var expectedNode = new Node(1, dataTypes.number);
                 
                 assert.deepEqual(expectedNode, interpreter.interpret(operatorNode, firstNode, secondNode));
@@ -68,7 +68,7 @@ describe('interpreter', function () {
 
     describe('hold', function(){
         it('should add the key in identifiers with the given value', function(){
-            var key = 'b';
+            var key = 'ram';
             var value = new Node(2, dataTypes.number);
             assert.equal(false, identifiers.contains(key));
             interpreter.hold(key, value);
@@ -77,7 +77,7 @@ describe('interpreter', function () {
         });
 
         it('should update the value in identifiers when is already present', function(){
-            var key = 'c';
+            var key = 'sham';
             var value = new Node(2, dataTypes.number);
             var updatedValue = new Node(4, dataTypes.number);
             interpreter.hold(key, value);

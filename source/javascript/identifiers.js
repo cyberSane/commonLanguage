@@ -1,4 +1,4 @@
-var Tree = require('./Tree');
+var Branch = require('./Branch');
 
 class Identifiers {
     constructor() {
@@ -6,7 +6,7 @@ class Identifiers {
     }
 
     assign(key, value) {
-        if (value instanceof Tree)
+        if (value instanceof Branch)
             this.variableTable[key] = value.evaluate();
         else
             this.variableTable[key] = value;

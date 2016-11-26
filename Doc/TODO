@@ -1,0 +1,339 @@
+The common Programming Language (CL)
+----
+(November 25, 2016)
+
+Guiding principles
+----
+Common Language(CL) is a new systems programming language intended to provide a productive and efficient programming environment for compiled programs such as servers and distributed systems.
+CL is a language to provide programming as we think, same as pseudo code. No need to think in programming language, a programmer can think in english grammer and can do same for coding.
+
+The design is motivated by the following guidelines:
+
+- very fast compilation (1MLOC/s stretch goal); instantaneous incremental compilation
+- procedural (modular language)
+- strongly typed
+- concise syntax avoiding repetition
+- remove unused data
+- reassignment of variables are not allowed
+
+The language should be strong enough that the compiler and run time can be
+written in itself.
+
+Modularity, identifiers and scopes
+----
+
+ - Their is a module level scoping.
+ - Identifiers are type of symbols used.
+ - The files can be exported and used in different files but according to modules.
+
+
+Program structure
+----
+
+ - The execution of the programs starts with a single file which contains main.
+ - The files which are imported in that main file are appended to that file before executing the file.
+ - The full structure will contain only one starting point.
+ - MACROS can be used.
+
+
+Typing
+----
+
+ - CL programs are strongly typed. 
+
+
+Functions
+----
+
+ - Functions contain declarations and statements.  
+ - They may be recursive.  
+ - Functions may be anonymous and appear as literals in expressions.
+ - Functions can be passed around.
+ - Nested functions are allowed.
+
+
+Syntax
+----
+statements ends with semicolon always.
+
+Here are examples CL program :
+  
+Adding two numbers - 2 plus 1
+subtraction two numbers - 2 minus 1
+multiplying two numbers - 2 multiply 2
+dividing two numbers - 2 divide 2
+
+set int a as 20;
+
+function -
+
+    set add takes int a, int b returns int does
+        //something
+    end
+
+    call add with a, b
+
+condition -
+
+    if true/false do              |                      a equals/divisible b do
+        //code goes here          |                         //code goes here
+    end                           |                      end
+
+
+            ---------------DEEP CONCEPT----------------
+loop
+
+    LENGTH times do
+      //code goes here
+    end
+
+
+Notation
+----
+
+- |   separates alternatives
+- ()  used for grouping
+
+Lower-case production names are used to identify productions that cannot
+be broken by white space or comments; they are usually tokens. Other
+productions are in snake case.
+
+
+Source code representation
+----
+
+ - Source code is Unicode text encoded in UTF-8.
+ - Tokenization follows the usual rules.  Source text is case-sensitive.
+ - White space is blanks, newlines, carriage returns, or tabs.
+ - Comments are "" to end of line.
+
+
+Digits and Letters
+----
+
+  octal_digit = { "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" } .
+  decimal_digit = { "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" } .
+  hex_digit = { "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "a" |
+                "A" | "b" | "B" | "c" | "C" | "d" | "D" | "e" | "E" | "f" | "F" } .
+  letter = "A" | "a" | ... "Z" | "z" | "_" .
+
+Identifiers
+----
+
+An identifier is a name for a program entity such as a variable, a
+type, a function, etc. An identifier must not be a reserved word.
+
+  identifier = letter {letter} .
+  	eg: a,raj
+
+Types
+----
+
+A type specifies the set of values which variables of that type may
+assume, and the operators that are applicable.
+
+
+Basic types
+----
+
+  bool    the truth values true and false
+  int     the integer values.
+  float   the float values
+  string  the string
+  double	  
+
+The string type
+----
+
+The string type represents the set of string values (strings).
+A string behaves like an array of bytes, with the following properties:
+
+- They are immutable: after creation, it is not possible to change the
+  contents of a string
+- No internal pointers: it is illegal to create a pointer to an inner
+  element of a string
+- They can be indexed: given string s1, s1[i] is a byte value
+- They can be concatenated: given strings s1 and s2, s1 + s2 is a value
+  combining the elements of s1 and s2 in sequence
+- Known length: the length of a string s1 can be obtained by the function/
+  operator len(s1).  The length of a string is the number of bytes within.
+  Unlike in C, there is no terminal NUL byte.
+- Creation 1: a string can be created from an integer value by a conversion
+    string('x') yields "x"
+- Creation 2: a string can by created from an array of integer values (maybe
+  just array of bytes) by a conversion
+  set string a as "";
+    0 of a is 'a'; 
+    1 of a is 'b'; 
+    2 of a is 'b'; 
+    call string with a == "abc";
+
+string literals
+----
+
+The rules are:
+
+ - escaped_char = "\" ( "a" | "b" | "f" | "n" | "r" | "t" | "v" ) .
+ - syntax = set abc as 'something';
+
+
+Function types
+----
+
+A function type denotes the set of all functions with the same signature.
+
+Functions can return multiple values simultaneously.
+
+    // Function types
+    set foo takes int a, int b returns int, int
+    	//do something
+    	return a,b
+    end
+
+
+Variable declarations
+----
+
+ - A variable declaration creates a variable and gives it a type and a name.
+ - It may mandetory to give the variable an initial value; 
+
+  VarDecl = "set".
+
+  set int i as 20;
+  set float u, v, w as 20,10,30;
+
+The syntax
+
+  set dataType variableName as value;
+  
+Also, in some contexts such as if or while statements, this construct can be used to
+declare local temporary variables.
+
+Function and method declarations
+----
+
+FunctionDecl = "set" NamedSignature  takes arguments 
+Function Ends = 'end'
+
+set min take int x, int y returns int 
+	if x greaterThen y 
+  		return x;
+	end;
+	return y;
+end
+
+
+Expressions
+----
+
+Expression syntax is like common english.
+  
+  Allocation = "set" variableName "as" value .
+
+  binary_op = log_op | rel_op | add_op | mul_op .
+  log_op = "or" | "and" .
+  rel_op = "equals" | "notEquals" | "greaterThan" | "greaterThenEqualsTo" | "smallerThen" | "smallerThenEqualto".
+
+  add_op = "plus" | "minus" | "power".
+  mul_op = "times" | "by" | "mod".
+
+  unary_op = "not" | "power" | "smallerThen" | "greaterThen" | "times" .
+
+  Precedence    Operator
+      1                  ||
+      2                  &&
+      3                  ==  !=  <  <=  >  >=
+      4                  +  -  |  ^
+      5                  *  /  %  <<  >>  &
+      6                  +  -  !  ^  <  >  *  &  (unary)
+    
+  
+Primary expressions
+
+  x
+  2
+  (s plus ".txt")
+  call foo with 3.1415, true
+  
+
+  Statement lists
+----
+
+Semicolons are used to separate individual statements of a statement list.
+
+Expression statements
+----
+
+  ExpressionStat = Expression .
+
+  f(x+y)
+
+
+IncDec statements
+----
+
+  IncDecStat = Expression ( "inc" | "dec" ) .
+
+  a inc
+
+
+Return statements
+----
+
+A return statement terminates execution of the containing function
+and optionally provides a result value or values to the caller.
+
+  ReturnStat = "return" [ ExpressionList ] .
+
+
+There are two ways to return values from a function.  The first is to
+explicitly list the return value or values in the return statement:
+
+  set simple_f takes null returns int {
+    return 2;
+  }
+
+  set simple_f takes null returns float, float {
+    return -7.0, -4.0;
+  }
+
+It is illegal to name the return values in the declaration even if the
+first form of return statement is used
+
+
+If statements
+----
+
+
+  IfStat = "if" [ bool ] do Expression Block 'end'.
+
+  if x graterThan 0 do
+    return true;
+  end
+  
+Loops
+____
+
+ while : - while a smallerThen 20 do
+ 			// code
+ 			end
+
+
+
+-------------------------------------------------------------------------------------------------------
+
+TODO : -
+
+polymorphism
+object-orientation
+garbage collection
+Multithreading and channels
+variables are immutabe ??
+Numeric literals
+list types (array)
+Modules(Object) and Methods and Interface
+class
+Export
+| "<<" | ">>" | "&".
+Switch statements
+continue, break

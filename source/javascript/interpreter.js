@@ -22,11 +22,11 @@ var power = function (firstNumber, secondNumber) {
 };
 
 var operations = {
-    '+': addition,
-    '-': subtraction,
-    '*': multiplication,
-    '/': division,
-    '^': power
+    'plus': addition,
+    'minus': subtraction,
+    'times': multiplication,
+    'by': division,
+    'power': power
 }
 
 class Interpreter {
@@ -44,7 +44,6 @@ class Interpreter {
         this.validate(secondValue);
         var first = this.retainValue(firstValue.value);
         var second = this.retainValue(secondValue.value);
-        
         return new Node(operations[operator.value](first, second), dataTypes.number);
     }
 
