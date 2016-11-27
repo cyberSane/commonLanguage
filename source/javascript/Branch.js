@@ -12,7 +12,7 @@ class Branch {
     evaluateNode(operatorValue, leftValue, rightValue){
         var equals = 'as';
         if(operatorValue.is(equals)){
-            this.interpreter.hold(leftValue.value, rightValue);
+            this.interpreter.hold(leftValue.getValue(), rightValue);
             return rightValue;
         }
         return this.interpreter.interpret(operatorValue, leftValue, rightValue);
