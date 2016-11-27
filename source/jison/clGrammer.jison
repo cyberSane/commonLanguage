@@ -16,14 +16,19 @@
 %%
 
 \s+                                                 /* skip whitespace */
-\d+                                                 return 'NUMBER'
-'times'|'by'|'minus'|'plus'|'power'|'not'|'mod'     return 'OPERATOR'
-';'                                                 return 'SEMICOLON'
-'equals'                                            return 'EQUALS' 
-'as'                                                return 'ASSIGNMENT' 
-'end'                                               return 'EOB'
-\w+                                                 return 'WORD'
-<<EOF>>                                             return 'EOF'
+\d+                                                         return 'NUMBER'
+'times'|'by'|'minus'|'plus'|'power'|'not'|'mod'             return 'OPERATOR'
+'equals'|'notEquals'|'greaterThan'|
+'greaterThenEqualsTo'|'smallerThen'|'smallerThenEqualto'    return 'RELATIONAL'
+'if'                                                        return 'IF'
+';'                                                         return 'SEMICOLON'
+'equals'                                                    return 'EQUALS' 
+'as'                                                        return 'ASSIGNMENT' 
+'set'                                                       return 'SET'
+'end'                                                       return 'EOB'
+'do'                                                        return 'DO'
+\w+                                                         return 'WORD'
+<<EOF>>                                                     return 'EOF'
 
 
 /lex
@@ -40,6 +45,16 @@
 
 program
     : statements EOF {return tree;}
+    | block EOF
+    ;
+
+
+block
+    :relationals statements EOB
+    ;
+
+relationals
+    : IF number RELATIONAL number DO
     ;
 
 statements
@@ -59,12 +74,12 @@ statement
     ;
 
 assignment
-    : identifier ASSIGNMENT number  
-        {$$ = new Branch(new Node($2, symbols.operator) , $1, $3, interpreter);}
-    | identifier ASSIGNMENT identifier 
-        { $$ = new Branch(new Node($2, symbols.operator) , $1, $3, interpreter); }
-    | identifier ASSIGNMENT expressions 
-        { $$ = new Branch(new Node($2, symbols.operator) , $1, $3, interpreter); }  
+    : SET identifier ASSIGNMENT number  
+        {$$ = new Branch(new Node($3, symbols.operator) , $2, $4, interpreter);}
+    | SET identifier ASSIGNMENT identifier 
+        {$$ = new Branch(new Node($3, symbols.operator) , $2, $4, interpreter);}
+    | SET identifier ASSIGNMENT expressions 
+        {$$ = new Branch(new Node($3, symbols.operator) , $2, $4, interpreter);}
     ; 
 
 expressions
