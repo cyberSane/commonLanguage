@@ -1,11 +1,11 @@
 class Node {
-    constructor(value, type) {
+    constructor(value, symbolType) {
         this.value = value;
-        this.type = type;
+        this.symbolType = symbolType;
     }
 
     isType(typeToCheck){
-        return this.type == typeToCheck;
+        return this.symbolType == typeToCheck;
     }
 
     is(element) {
