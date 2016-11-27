@@ -18,6 +18,7 @@
 \s+                                                 /* skip whitespace */
 \d+                                                 return 'NUMBER'
 'times'|'by'|'minus'|'plus'|'power'|'not'|'mod'     return 'OPERATOR'
+'int'|'bool'|'float'|'string'                       return 'DATA_TYPES'
 ';'                                                 return 'SEMICOLON'
 'equals'                                            return 'EQUALS' 
 'as'                                                return 'ASSIGNMENT' 
