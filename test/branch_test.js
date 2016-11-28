@@ -1,7 +1,8 @@
 var Node = require('../source/javascript/node.js');
 var Branch = require('../source/javascript/Branch.js');
 var symbols = require('../source/javascript/symbols.js');
-var identifiers= require('../source/javascript/identifiers.js');
+var Identifiers = require('../source/javascript/identifiers.js');
+var identifiers = new Identifiers(); 
 var Interpreter= require('../source/javascript/interpreter.js');
 var assert = require('assert');
 
