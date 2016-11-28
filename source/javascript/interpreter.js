@@ -37,11 +37,12 @@ class Interpreter {
 
     hold(key, value) {
         if(value.isType(symbols.variable)){
-            this.validate(value);    
+            this.validate(value);
             this.identifiers.assign(key, this.identifiers.getValueOf(value.getValue()));
         }
-        else
-            this.identifiers.assign(key, value);
+        else if(this.identifiers.contains(key))
+            throw new Error(`${key} is already assign`);
+        this.identifiers.assign(key, value);
     }
 
     interpret(operator, firstValue, secondValue) {

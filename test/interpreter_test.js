@@ -56,8 +56,8 @@ describe('interpreter', function () {
 
         describe('mathematical operation with one variable and one number arguments', function () {
             it('should retrive the value of variable and calculate the subtraction and give result', function () {
-                interpreter.hold('a', new Node(2, symbols.number));
-                firstNode = new Node('a', symbols.variable);
+                interpreter.hold('key', new Node(2, symbols.number));
+                firstNode = new Node('key', symbols.variable);
                 var operatorNode = new Node('minus', symbols.operator);
                 var expectedNode = new Node(1, symbols.number);
                 
@@ -76,15 +76,13 @@ describe('interpreter', function () {
             assert.equal(value, identifiers.getValueOf(key));
         });
 
-        it('should update the value in identifiers when is already present', function(){
+        it('should throw error if we try to update the value of the predefined variable', function(){
             var key = 'sham';
             var value = new Node(2, symbols.number);
             var updatedValue = new Node(4, symbols.number);
             interpreter.hold(key, value);
             assert.equal(true, identifiers.contains(key));
-            interpreter.hold(key, updatedValue);
-            assert.equal(true, identifiers.contains(key));
-            assert.equal(updatedValue, identifiers.getValueOf(key));
+            assert.throws(function(){interpreter.hold(key, updatedValue)});
         });
     });
 
