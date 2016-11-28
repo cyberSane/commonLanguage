@@ -95,7 +95,8 @@ describe('interpreter', function () {
                 it('should not throw exception', function(){
                     var symbol = 'd';
                     var node = new Node(symbol, symbols.variable);
-                    interpreter.hold(symbol, 20);
+                    var value = new Node(20, symbol.number);
+                    interpreter.hold(symbol, value);
                     assert.doesNotThrow(function(){interpreter.validate(node)});
                 });
             });
