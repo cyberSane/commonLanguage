@@ -1,15 +1,16 @@
 %{
    var path = require('path');
     var Branch = require(path.resolve('./source/javascript/branch.js'));
-    var Node = require(path.resolve('./source/javascript/node.js'));
+    var Node = require(path.resolve('./source/javascript/Node.js'));
     var symbols = require(path.resolve('./source/javascript/symbols'));
     var Tree = require(path.resolve('./source/javascript/tree.js'));
     var identifiers = require(path.resolve('./source/javascript/identifiers.js'));
-    var Interpreter = require(path.resolve('./source/javascript/interpreter.js'));
+    var Interpreter = require(path.resolve('./source/javascript/Interpreter.js'));
     var interpreter = new Interpreter(identifiers);
     var tree = new Tree(identifiers);
     var zeroNode = new Node(0, symbols.number);
     var plusNode = new Node('plus', symbols.operator);
+    var currentTree = new Tree();
 %}
 
 %lex
@@ -19,7 +20,7 @@
 \d+                                                         return 'NUMBER'
 'times'|'by'|'minus'|'plus'|'power'|'not'|'mod'             return 'OPERATOR'
 'equals'|'notEquals'|'greaterThan'|
-'greaterThenEqualsTo'|'smallerThen'|'smallerThenEqualto'    return 'RELATIONAL'
+'greaterThenEqualsTo'|'smallerThen'|'smallerThenEqualTo'    return 'RELATIONAL'
 'if'                                                        return 'IF'
 ';'                                                         return 'SEMICOLON'
 'equals'                                                    return 'EQUALS' 
@@ -50,11 +51,18 @@ program
 
 
 block
-    :relationals statements EOB
+    : relationals statements EOB
+        {
+        subTrees = new Trees();
+        subTrees.add($1);
+        subTrees.add($2);
+        trees.add(subTrees); currentTree = new Tree();
+        }
     ;
 
 relationals
     : IF number RELATIONAL number DO
+        {currentTree.addBranch(new Branch($3, $2, $4, interpreter));}
     ;
 
 statements
