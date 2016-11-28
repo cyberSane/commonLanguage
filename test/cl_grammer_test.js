@@ -2,7 +2,7 @@ var assert = require('assert');
 var symbols = require('../source/javascript/symbols.js');
 var Parser = require('jison').Parser;
 var grammer = require('fs').readFileSync('./source/jison/clGrammer.jison', 'utf-8');
-var Node = require('../source/javascript/node.js');
+var Node = require('../source/javascript/Node.js');
 var parser = new Parser(grammer);
 
 describe('common language grammer', function () {

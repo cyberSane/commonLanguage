@@ -1,4 +1,4 @@
-var Node = require('./node.js');
+var Node = require('./Node.js');
 var symbols = require('./symbols.js');
 
 var addition = function (firstNumber, secondNumber) {

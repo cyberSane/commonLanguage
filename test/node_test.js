@@ -1,4 +1,4 @@
-var Node = require('../source/javascript/node.js');
+var Node = require('../source/javascript/Node.js');
 var symbols = require('../source/javascript/symbols.js');
 var assert = require('assert');
 

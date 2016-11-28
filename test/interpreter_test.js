@@ -1,5 +1,5 @@
-var Interpreter = require('../source/javascript/interpreter.js');
-var Node = require('../source/javascript/node.js');
+var Interpreter = require('../source/javascript/Interpreter.js');
+var Node = require('../source/javascript/Node.js');
 var symbols = require('../source/javascript/symbols.js');
 var identifiers = require('../source/javascript/identifiers.js');
 var assert = require('assert');
