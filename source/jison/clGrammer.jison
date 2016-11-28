@@ -22,6 +22,7 @@
 'equals'                                            return 'EQUALS' 
 'as'                                                return 'ASSIGNMENT' 
 'end'                                               return 'EOB'
+'set'                                               return 'SET'
 \w+                                                 return 'WORD'
 <<EOF>>                                             return 'EOF'
 
@@ -59,12 +60,12 @@ statement
     ;
 
 assignment
-    : identifier ASSIGNMENT number  
-        {$$ = new Branch(new Node($2, symbols.operator) , $1, $3, interpreter);}
-    | identifier ASSIGNMENT identifier 
-        { $$ = new Branch(new Node($2, symbols.operator) , $1, $3, interpreter); }
-    | identifier ASSIGNMENT expressions 
-        { $$ = new Branch(new Node($2, symbols.operator) , $1, $3, interpreter); }  
+    : SET identifier ASSIGNMENT number  
+        {$$ = new Branch(new Node($3, symbols.operator) , $2, $4, interpreter);}
+    | SET identifier ASSIGNMENT identifier 
+        {$$ = new Branch(new Node($3, symbols.operator) , $2, $4, interpreter);}
+    | SET identifier ASSIGNMENT expressions 
+        {$$ = new Branch(new Node($3, symbols.operator) , $2, $4, interpreter);}
     ; 
 
 expressions
