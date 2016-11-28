@@ -47,20 +47,20 @@ class Interpreter {
     interpret(operator, firstValue, secondValue) {
         this.validate(firstValue);
         this.validate(secondValue);
-        var first = this.retainValue(firstValue.value);
-        var second = this.retainValue(secondValue.value);
-        return new Node(operations[operator.value](first, second), symbols.number);
+        var first = this.retainValue(firstValue.getValue());
+        var second = this.retainValue(secondValue.getValue());
+        return new Node(operations[operator.getValue()](first, second), symbols.number);
     }
 
     validate(node) {
-        if(node.isType(symbols.variable) && !this.identifiers.contains(node.value)){
-            throw new Error(`${node.value} is undefined`);
+        if(node.isType(symbols.variable) && !this.identifiers.contains(node.getValue())){
+            throw new Error(`${node.getValue()} is undefined`);
         }
     }
 
     retainValue(element) {
         return this.identifiers.contains(element) ? 
-        this.identifiers.getValueOf(element).value : element;
+        this.identifiers.getValueOf(element).getValue() : element;
     }
 }
 
