@@ -2,9 +2,10 @@ var Tree = require('../source/javascript/Tree.js');
 var Node = require('../source/javascript/Node.js');
 var Branch = require('../source/javascript/Branch.js');
 var symbols = require('../source/javascript/symbols.js');
-var identifiers= require('../source/javascript/identifiers.js');
-var Interpreter= require('../source/javascript/Interpreter.js');
+var Identifiers= require('../source/javascript/identifiers.js');
+var Interpreter= require('../source/javascript/interpreter.js');
 var assert = require('assert');
+var identifiers = new Identifiers();
 
 describe('Tree', function () {
 	var interpreter = new Interpreter(identifiers);
@@ -23,13 +24,13 @@ describe('Tree', function () {
     		var tree = new Tree();
 
     		var firstOperator = new Node('as', symbols.operator);
-            var firstLeftNode = new Node('a', symbols.variable);
+            var firstLeftNode = new Node('math', symbols.variable);
             var firstRightNode = new Node(2, symbols.number);
             var firstBranch = new Branch(firstOperator, firstLeftNode, firstRightNode, interpreter);
             tree.addBranch(firstBranch);
 
 			var secondOperator = new Node('plus', symbols.operator);
-            var secondLeftNode = new Node('a', symbols.variable);
+            var secondLeftNode = new Node('math', symbols.variable);
             var secondRightNode = new Node(2, symbols.number);
             var secondBranch = new Branch(secondOperator, secondLeftNode, secondRightNode, interpreter);
             tree.addBranch(secondBranch);

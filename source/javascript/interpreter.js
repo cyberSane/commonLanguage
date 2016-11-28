@@ -37,30 +37,31 @@ class Interpreter {
 
     hold(key, value) {
         if(value.isType(symbols.variable)){
-            this.validate(value);    
+            this.validate(value);
             this.identifiers.assign(key, this.identifiers.getValueOf(value.getValue()));
         }
-        else
-            this.identifiers.assign(key, value);
+        else if(this.identifiers.contains(key))
+            throw new Error(`${key} is already assign`);
+        this.identifiers.assign(key, value);
     }
 
     interpret(operator, firstValue, secondValue) {
         this.validate(firstValue);
         this.validate(secondValue);
-        var first = this.retainValue(firstValue.value);
-        var second = this.retainValue(secondValue.value);
-        return new Node(operations[operator.value](first, second), symbols.number);
+        var first = this.retainValue(firstValue.getValue());
+        var second = this.retainValue(secondValue.getValue());
+        return new Node(operations[operator.getValue()](first, second), symbols.number);
     }
 
     validate(node) {
-        if(node.isType(symbols.variable) && !this.identifiers.contains(node.value)){
-            throw new Error(`${node.value} is undefined`);
+        if(node.isType(symbols.variable) && !this.identifiers.contains(node.getValue())){
+            throw new Error(`${node.getValue()} is undefined`);
         }
     }
 
     retainValue(element) {
         return this.identifiers.contains(element) ? 
-        this.identifiers.getValueOf(element).value : element;
+        this.identifiers.getValueOf(element).getValue() : element;
     }
 }
 

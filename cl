@@ -1,1 +1,1 @@
-node cl.js 
+node cl.js $1

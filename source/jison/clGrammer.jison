@@ -4,8 +4,9 @@
     var Node = require(path.resolve('./source/javascript/Node.js'));
     var symbols = require(path.resolve('./source/javascript/symbols'));
     var Tree = require(path.resolve('./source/javascript/tree.js'));
-    var identifiers = require(path.resolve('./source/javascript/identifiers.js'));
-    var Interpreter = require(path.resolve('./source/javascript/Interpreter.js'));
+    var Identifiers = require(path.resolve('./source/javascript/identifiers.js'));
+    var identifiers = new Identifiers();
+    var Interpreter = require(path.resolve('./source/javascript/interpreter.js'));
     var interpreter = new Interpreter(identifiers);
     var tree = new Tree(identifiers);
     var zeroNode = new Node(0, symbols.number);
@@ -30,7 +31,6 @@
 'do'                                                        return 'DO'
 \w+                                                         return 'WORD'
 <<EOF>>                                                     return 'EOF'
-
 
 /lex
 
